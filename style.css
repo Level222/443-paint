@@ -1,0 +1,201 @@
+:root {
+  --main-color: #598048;
+  --main-color-light: #68aa4c;
+  --main-color-dark: #4e6b41;
+  --main-gray: #d8d8d8;
+  --main-light-gray: #efefef;
+  --main-dark-gray: #cacaca;
+  --sub-color: #685730;
+}
+
+body {
+  font: 18px 'Saira', sans-serif;
+}
+
+main {
+  margin: 15px;
+}
+
+h1 {
+  color: var(--main-color);
+  margin: .3em 0;
+}
+
+.main-canvas {
+  border: .5px solid var(--main-gray);
+  background-color: #fff;
+}
+
+.options {
+  margin: 10px;
+  color: var(--sub-color);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.options input[type=checkbox] {
+  accent-color: var(--main-color);
+}
+
+.options :where(input[type=text], select) {
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid var(--main-gray);
+  transition: border-bottom-color .2s;
+}
+
+.options select {
+  line-height: 1.3em;
+}
+
+.options input[type=text]:focus {
+  outline: none;
+}
+
+.options :where(:where(input[type=text], select):hover, input[type=text]:focus) {
+  border-bottom-color: var(--main-color);
+}
+
+.options button {
+  border: none;
+  border-bottom: 1px solid var(--main-color);
+  border-right: 1px solid var(--main-color);
+  border-top: 1px solid var(--main-gray);
+  border-left: 1px solid var(--main-gray);
+  transition: border-color, background-color .2s;
+}
+
+.options button:hover {
+  background-color: var(--main-color);
+  color: #fff;
+  border: 1px solid var(--main-color);
+}
+
+.options .styled-file-input-main {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  padding: 0;
+  border: none;
+}
+
+.options .styled-file-input-label {
+  position: relative;
+}
+
+.options .styled-file-input-label:has(:focus-visible) {
+  outline: 2px solid var(--sub-color);
+  border-radius: 2px;
+}
+
+.options :where(.noUi-target, .noUi-connect, .noUi-handle) {
+  transition: background-color .05s;
+}
+
+.options :where(.noUi-target, .noUi-handle) {
+  box-shadow: none;
+}
+
+.options .noUi-handle::before,
+.options .noUi-handle::after {
+  display: none;
+}
+
+.options .noUi-target {
+  height: 8px;
+  border: none;
+  background-color: var(--main-gray);
+}
+
+.options .noUi-target:hover {
+  background-color: var(--main-dark-gray);
+}
+
+.options .noUi-target:hover .noUi-connect {
+  background-color: var(--main-color-dark);
+}
+
+.options .noUi-target:active {
+  background-color: var(--main-light-gray);
+}
+
+.options .noUi-target:active :is(.noUi-connect, .noUi-handle) {
+  background-color: var(--main-color-light);
+}
+
+.options .noUi-connects {
+  border-radius: 5px;
+}
+
+.options .noUi-connect {
+  background: var(--main-color);
+}
+
+.options .noUi-handle {
+  height: 16px;
+  width: 16px;
+  top: -4px;
+  right: -8px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--main-color);
+}
+
+.options .noUi-handle:hover {
+  background-color: var(--main-color-dark);
+}
+
+.number-input {
+  display: contents;
+}
+
+.number-input-text {
+  font-size: .8em;
+  width: 50px;
+}
+
+.number-input-slider {
+  flex: 1;
+}
+
+.controls {
+  display: flex;
+  gap: 15px;
+}
+
+.filename-input {
+  width: 120px;
+}
+
+.shapes-input {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.shapes-input label {
+  display: flex;
+  gap: 5px;
+}
+
+.number-input-grid {
+  display: grid;
+  grid-template-columns: max-content max-content 1fr max-content;
+  gap: 3px 10px;
+  align-items: center;
+  width: 500px;
+  max-width: 100%;
+}
+
+.number-input-grid .number-input:not(.range) .number-input-slider {
+  grid-column: 2 / 4;
+}
+
+.background-input {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 500px;
+  max-width: 100%;
+}
