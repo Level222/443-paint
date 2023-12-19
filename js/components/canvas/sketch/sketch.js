@@ -165,8 +165,6 @@ const sketch = (p, detail) => {
     updateCanvasSizeStyle();
   };
 
-  setInterval(() => console.log(p.frameRate()), 1000);
-
   p.draw = () => {
     resetBackground();
     renderingObjectsHistory.draw();
