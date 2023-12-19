@@ -1,7 +1,9 @@
 {
   "devDependencies": {
-    "@types/p5": "^1.7.3",
-    "htm": "^3.1.1",
-    "nouislider": "^15.7.1"
+    "@types/p5": "1.7.6",
+    "@types/react": "18.2.45",
+    "@types/react-dom": "18.2.18",
+    "htm": "3.1.1",
+    "rc-slider": "10.5.0"
   }
 }
