@@ -3,6 +3,7 @@ import html from "../utils/html.js";
 import PaintCanvas from "./canvas/PaintCanvas.js";
 import OptionsInput from "./options/OptionsInput.js";
 import Controls from "./Controls.js";
+import Footer from "./Footer.js";
 
 /**
  * @type {import("./canvas/sketch/sketch.js").PaintOptions}
@@ -80,6 +81,7 @@ const App = () => {
         <${OptionsInput} options=${options} onChange=${handleChangeOptions} />
       </div>
     </main>
+    <${Footer} />
   `;
 };
 
