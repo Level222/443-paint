@@ -3,6 +3,7 @@ import html from "../../utils/html.js";
 import Slider from "rc-slider";
 import { arrayWith } from "../../utils/array-utils.js";
 import InstantSelectTextBox from "../InstantSelectTextBox.js";
+import { useImperativeHandle } from "react";
 
 /**
  * @template T
@@ -20,6 +21,13 @@ const isHTMLInputElement = (value) => {
 };
 
 /**
+ * @template {{}} T
+ * @typedef {{
+ *   setValue: (value: T) => void;
+ * }} RcsliderWithTextBoxRef
+ */
+
+/**
  * @template T
  * @typedef {(
  *   import("rc-slider").SliderProps<T> & {
@@ -32,6 +40,7 @@ const isHTMLInputElement = (value) => {
  * @template {{}} T
  * @typedef {{
  *   slider: SliderOptions<T>;
+ *   ref: import("react").Ref<RcsliderWithTextBoxRef<T>>;
  * }} BaseOptions
  */
 
@@ -98,6 +107,24 @@ const useRcsliderWithTextBox = (options) => {
   );
 
   const [textBoxValue, setTextBoxValue] = useState(currentValue.map(String));
+
+  useImperativeHandle(
+    /** @type {import("react").Ref<RcsliderWithTextBoxRef<T>>} */ (options.ref),
+    () => ({
+      /**
+       * @param {T | number[]} newValue
+       */
+      setValue: (newValue) => {
+        const newValueArray = isOptionHasFormat
+          ? options.format.from(/** @type {T} */ (newValue))
+          : /** @type {number[]} */ (newValue);
+        setCurrentValue(newValueArray);
+        setTextBoxValue(newValueArray.map(String));
+        dispatchSliderEvent("onChange", newValueArray);
+        dispatchSliderEvent("onChangeComplete", newValueArray);
+      }
+    })
+  );
 
   useEffect(() => {
     if (typeof value === "number" || Array.isArray(value)) {

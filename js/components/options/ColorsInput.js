@@ -17,6 +17,7 @@ const ColorsInput = ({ colors, onChange }) => {
       ([colorName, { min, max }]) => html`
         ${colorName}
         <${RangeSliderWithTextBox}
+          key=${colorName}
           title=${`${colorName} color range`}
           value=${[min, max]}
           min=${0}

@@ -27,19 +27,17 @@ const ImagesInput = ({ images, onChange }) => {
 
     onChange([
       ...images,
-      ...[...target.files].flatMap((file) => {
-        if (!/^image\//.test(file.type)) {
-          return [];
-        }
-
-        return [
-          {
-            src: URL.createObjectURL(file),
-            enabled: true,
-            title: file.name.replace(/\.[^.]+$/, "")
-          }
-        ];
-      })
+      ...[...target.files].flatMap((file) =>
+        /^image\//.test(file.type)
+          ? [
+              {
+                src: URL.createObjectURL(file),
+                enabled: true,
+                title: file.name.replace(/\.[^.]+$/, "")
+              }
+            ]
+          : []
+      )
     ]);
   };
 
@@ -50,7 +48,7 @@ const ImagesInput = ({ images, onChange }) => {
           const id = `${idPrefix}-${index}`;
 
           return html`
-            <label className="image-wrapper" htmlFor=${id}>
+            <label key=${index} className="image-wrapper" htmlFor=${id}>
               <input
                 type="checkbox"
                 id=${id}
@@ -60,7 +58,11 @@ const ImagesInput = ({ images, onChange }) => {
                     target
                   }) => {
                     onChange(
-                      arrayWith(images, index, { src, enabled: target.checked, title })
+                      arrayWith(images, index, {
+                        src,
+                        enabled: target.checked,
+                        title
+                      })
                     );
                   }
                 }

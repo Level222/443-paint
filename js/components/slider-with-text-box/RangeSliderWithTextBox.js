@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import html from "../../utils/html.js";
 import useRcsliderWithTextBox from "./useRcsliderWithTextBox.js";
 
@@ -13,9 +14,13 @@ import useRcsliderWithTextBox from "./useRcsliderWithTextBox.js";
  */
 
 /**
- * @type {import("react").FC<Props>}
+ * @typedef {import("./useRcsliderWithTextBox.js").RcsliderWithTextBoxRef<[number, number]>} RangeSliderWithTextBoxRef
  */
-const RangeSliderWithTextBox = ({ title, ...sliderProps }) => {
+
+/**
+ * @type {import("react").ForwardRefRenderFunction<RangeSliderWithTextBoxRef, Props>}
+ */
+const RangeSliderWithTextBoxRefFunction = ({ title, ...sliderProps }, ref) => {
   const {
     slider,
     textBoxes: [startTextBox, endTextBox]
@@ -31,12 +36,17 @@ const RangeSliderWithTextBox = ({ title, ...sliderProps }) => {
     format: {
       from: (value) => value,
       to: (value) => [value[0], value[1]]
-    }
+    },
+    ref
   });
 
   return html`
-    <div className="range-input" title=${title}>${startTextBox}${slider}${endTextBox}</div>
+    <div className="range-input" title=${title}>
+      ${startTextBox}${slider}${endTextBox}
+    </div>
   `;
 };
+
+const RangeSliderWithTextBox = forwardRef(RangeSliderWithTextBoxRefFunction);
 
 export default RangeSliderWithTextBox;

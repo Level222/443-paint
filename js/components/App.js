@@ -9,41 +9,45 @@ import Footer from "./Footer.js";
  * @type {import("./canvas/sketch/sketch.js").PaintOptions}
  */
 const defaultOptions = {
-  width: 1200,
-  height: 800,
-  shapes: {
-    circle: true,
-    square: true,
-    triangle: true
-  },
-  images: [
-    { src: "./images/star.png", enabled: true, title: "star" },
-    { src: "./images/heart.png", enabled: false, title: "heart" },
-    { src: "./images/smile-face.png", enabled: false, title: "smile-face" }
-  ],
-  minSize: 10,
-  maxSize: 40,
-  spread: 50,
-  colors: {
-    red: {
-      min: 0,
-      max: 127
+  drawing: {
+    shapes: {
+      circle: true,
+      square: true,
+      triangle: true
     },
-    green: {
-      min: 0,
-      max: 255
-    },
-    blue: {
-      min: 0,
-      max: 255
-    },
-    alpha: {
-      min: 32,
-      max: 127
+    images: [
+      { src: "./images/star.png", enabled: true, title: "star" },
+      { src: "./images/heart.png", enabled: false, title: "heart" },
+      { src: "./images/smile-face.png", enabled: false, title: "smile-face" }
+    ],
+    minSize: 10,
+    maxSize: 40,
+    spread: 50,
+    colors: {
+      red: {
+        min: 0,
+        max: 127
+      },
+      green: {
+        min: 0,
+        max: 255
+      },
+      blue: {
+        min: 0,
+        max: 255
+      },
+      alpha: {
+        min: 32,
+        max: 127
+      }
     }
   },
   background: {
+    width: 1200,
+    height: 800,
+    mode: "color",
     rgb: "#fafafa",
+    src: "./images/mona-lisa.jpg",
     alpha: 255
   }
 };

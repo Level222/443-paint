@@ -4,23 +4,27 @@ import ImageCollection from "./image-collection.js";
 
 /**
  * @typedef {{
- *   width: number;
- *   height: number;
- *   shapes: Record<string, boolean>;
- *   images: {
- *     src: string;
- *     enabled: boolean;
- *     title: string;
- *   }[];
- *   minSize: number;
- *   maxSize: number;
- *   spread: number;
- *   colors: Record<"red" | "green" | "blue" | "alpha", {
- *     min: number;
- *     max: number;
- *   }>;
+ *   drawing: {
+ *     shapes: Record<string, boolean>;
+ *     images: {
+ *       src: string;
+ *       enabled: boolean;
+ *       title: string;
+ *     }[];
+ *     minSize: number;
+ *     maxSize: number;
+ *     spread: number;
+ *     colors: Record<"red" | "green" | "blue" | "alpha", {
+ *       min: number;
+ *       max: number;
+ *     }>;
+ *   };
  *   background: {
+ *     mode: "color" | "image";
+ *     width: number;
+ *     height: number;
  *     rgb: string;
+ *     src: string;
  *     alpha: number;
  *   };
  * }} PaintOptions
@@ -66,20 +70,34 @@ import ImageCollection from "./image-collection.js";
  */
 const sketch = (p, detail) => {
   /**
+   * @type {import("p5").Image}
+   */
+  let backgroundImage;
+
+  /**
    * @returns {void}
    */
   const resetBackground = () => {
     const options = detail.getOptions();
 
+    const { background } = options;
+
     const { width, height } = p.drawingContext.canvas;
     p.drawingContext.clearRect(0, 0, width, height);
-    const { rgb, alpha } = options.background;
-    const backgroundColor = p.color(rgb);
-    backgroundColor.setAlpha(alpha);
-    p.drawingContext.save();
-    p.drawingContext.fillStyle = backgroundColor.toString();
-    p.drawingContext.fillRect(0, 0, width, height);
-    p.drawingContext.restore();
+
+    if (background.mode === "color") {
+      const { rgb, alpha } = options.background;
+      const backgroundColor = p.color(rgb);
+      backgroundColor.setAlpha(alpha);
+      p.drawingContext.save();
+      p.drawingContext.fillStyle = backgroundColor.toString();
+      p.drawingContext.fillRect(0, 0, width, height);
+      p.drawingContext.restore();
+    } else {
+      const { alpha } = background;
+      p.tint(255, alpha);
+      p.image(backgroundImage, 0, 0, width, height);
+    }
   };
 
   /**
@@ -93,14 +111,14 @@ const sketch = (p, detail) => {
     renderer
       .style("width", "auto")
       .style("height", "auto")
-      .style("max-width", `min(100%, ${options.width / devicePixelRatio}px)`)
+      .style("max-width", `min(100%, ${options.background.width / devicePixelRatio}px)`)
       .style("max-height", "85vh");
   };
 
   const resize = () => {
     const options = detail.getOptions();
 
-    p.resizeCanvas(options.width, options.height);
+    p.resizeCanvas(options.background.width, options.background.height);
 
     updateCanvasSizeStyle();
   };
@@ -109,7 +127,8 @@ const sketch = (p, detail) => {
 
   p.preload = () => {
     const options = detail.getOptions();
-    images.setImages(options.images);
+    images.setImages(options.drawing.images);
+    backgroundImage = p.loadImage(options.background.src);
   };
 
   const renderingObjectsHistory = new HistoryStash(p);
@@ -123,7 +142,7 @@ const sketch = (p, detail) => {
     renderingObjectsHistory[updateType]((pg) => {
       drawRandomRenderingObject(
         pg,
-        options,
+        options.drawing,
         p.mouseX,
         p.mouseY,
         images.getSuccessEnabledImages()
@@ -172,14 +191,18 @@ const sketch = (p, detail) => {
 
   detail.onOptionChange((currentOptions, prevOptions) => {
     if (
-      currentOptions.width !== prevOptions.width ||
-      currentOptions.height !== prevOptions.height
+      currentOptions.background.width !== prevOptions.background.width ||
+      currentOptions.background.height !== prevOptions.background.height
     ) {
       resize();
     }
 
-    if (currentOptions.images !== prevOptions.images) {
-      images.setImages(currentOptions.images);
+    if (currentOptions.drawing.images !== prevOptions.drawing.images) {
+      images.setImages(currentOptions.drawing.images);
+    }
+
+    if (currentOptions.background.src !== prevOptions.background.src) {
+      backgroundImage = p.loadImage(currentOptions.background.src);
     }
   });
 

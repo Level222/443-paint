@@ -20,7 +20,7 @@ const ShapesInput = ({ shapes, onChange }) => {
         const id = `${idPrefix}-${shapeName}`;
 
         return html`
-          <label htmlFor=${id} title=${`enable ${shapeName} shapes`}>
+          <label key=${shapeName} htmlFor=${id} title=${`enable ${shapeName} shapes`}>
             <input
               type="checkbox"
               id=${id}

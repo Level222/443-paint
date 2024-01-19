@@ -36,13 +36,13 @@ const imageWithLongSide = (p, image, x, y, longSide) => {
 
 /**
  * @param {import("p5").p5InstanceExtensions} p
- * @param {import("./sketch").PaintOptions} options
+ * @param {import("./sketch").PaintOptions["drawing"]} drawingOptions
  * @param {number} baseX
  * @param {number} baseY
  * @param {import("p5").Image[]} images
  */
-const drawRandomRenderingObject = (p, options, baseX, baseY, images) => {
-  const enabledShapes = Object.entries(options.shapes).filter(
+const drawRandomRenderingObject = (p, drawingOptions, baseX, baseY, images) => {
+  const enabledShapes = Object.entries(drawingOptions.shapes).filter(
     ([, checked]) => checked
   );
 
@@ -55,7 +55,7 @@ const drawRandomRenderingObject = (p, options, baseX, baseY, images) => {
   const objectIndex = p.floor(p.random(totalEnabledObjects));
   const type = objectIndex < enabledShapes.length ? "shape" : "image";
 
-  const maxSpread = options.spread / 2;
+  const maxSpread = drawingOptions.spread / 2;
   const minSpread = -maxSpread;
 
   const x = baseX + p.random(minSpread, maxSpread);
@@ -63,7 +63,7 @@ const drawRandomRenderingObject = (p, options, baseX, baseY, images) => {
 
   const direction = p.random(0, p.TWO_PI);
 
-  const { colors } = options;
+  const { colors } = drawingOptions;
 
   const red = p.random(colors.red.min, colors.red.max);
   const green = p.random(colors.green.min, colors.green.max);
@@ -71,7 +71,7 @@ const drawRandomRenderingObject = (p, options, baseX, baseY, images) => {
   const alpha = p.random(colors.alpha.min, colors.alpha.max);
   const fillColor = p.color(red, green, blue, alpha);
 
-  const size = p.random(options.minSize, options.maxSize);
+  const size = p.random(drawingOptions.minSize, drawingOptions.maxSize);
 
   p.push();
 

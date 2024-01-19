@@ -24,7 +24,7 @@ class ImageCollection {
   }
 
   /**
-   * @param {import("./sketch").PaintOptions["images"]} images
+   * @param {import("./sketch").PaintOptions["drawing"]["images"]} images
    */
   setImages(images) {
     for (const { src, enabled } of images) {

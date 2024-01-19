@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import html from "../../utils/html.js";
 import useRcsliderWithTextBox from "./useRcsliderWithTextBox.js";
 
@@ -13,9 +14,13 @@ import useRcsliderWithTextBox from "./useRcsliderWithTextBox.js";
  */
 
 /**
- * @type {import("react").FC<Props>}
+ * @typedef {import("./useRcsliderWithTextBox.js").RcsliderWithTextBoxRef<number>} SliderWithTextBoxRef
  */
-const SliderWithTextBox = ({ title, ...sliderProps }) => {
+
+/**
+ * @type {import("react").ForwardRefRenderFunction<SliderWithTextBoxRef, Props>}
+ */
+const SliderWithTextBoxRefFunction = ({ title, ...sliderProps }, ref) => {
   const {
     slider,
     textBoxes: [textBox]
@@ -26,12 +31,15 @@ const SliderWithTextBox = ({ title, ...sliderProps }) => {
     format: {
       from: (value) => [value],
       to: ([value]) => value
-    }
+    },
+    ref
   });
 
   return html`
     <div className="number-input" title=${title}>${slider}${textBox}</div>
   `;
 };
+
+const SliderWithTextBox = forwardRef(SliderWithTextBoxRefFunction);
 
 export default SliderWithTextBox;
