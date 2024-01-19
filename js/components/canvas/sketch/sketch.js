@@ -111,7 +111,10 @@ const sketch = (p, detail) => {
     renderer
       .style("width", "auto")
       .style("height", "auto")
-      .style("max-width", `min(100%, ${options.background.width / devicePixelRatio}px)`)
+      .style(
+        "max-width",
+        `min(100%, ${options.background.width / devicePixelRatio}px)`
+      )
       .style("max-height", "85vh");
   };
 
@@ -227,10 +230,20 @@ const sketch = (p, detail) => {
 
   const eventListenerController = new AbortController();
 
+  /**
+   * @param {KeyboardEvent} e
+   */
+  const isCtrlXorMetaKey = (e) =>
+    (e.ctrlKey || e.metaKey) && !(e.ctrlKey && e.metaKey);
+
   document.addEventListener(
     "keydown",
     (e) => {
-      if (e.target === document.body && e.code === "KeyZ") {
+      if (
+        e.target === document.body &&
+        e.code === "KeyZ" &&
+        isCtrlXorMetaKey(e)
+      ) {
         e.preventDefault();
 
         if (e.shiftKey) {

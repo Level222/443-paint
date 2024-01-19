@@ -60,7 +60,7 @@ const Controls = ({ onMessage }) => {
       </div>
       <div className="controls-section">
         <button
-          title="back (⌘Z)"
+          title="back (Ctrl+Z)"
           onClick=${() => {
             onMessage?.({ type: "back" });
           }}
@@ -68,7 +68,7 @@ const Controls = ({ onMessage }) => {
           <${RotateLeft} />
         </button>
         <button
-          title="forward (⌘⇧Z)"
+          title="forward (Ctrl+Shift+Z)"
           onClick=${() => {
             onMessage?.({ type: "forward" });
           }}
