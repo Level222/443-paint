@@ -6,8 +6,8 @@ import PlusCircle from "../svg/PlusCircle.js";
 
 /**
  * @typedef {{
- *   images: import("../canvas/sketch/sketch.js").PaintOptions["images"]
- *   onChange: (newImages: import("../canvas/sketch/sketch.js").PaintOptions["images"]) => void;
+ *   images: import("../canvas/sketch/sketch.js").PaintOptions["drawing"]["images"]
+ *   onChange: (newImages: import("../canvas/sketch/sketch.js").PaintOptions["drawing"]["images"]) => void;
  * }} Props
  */
 

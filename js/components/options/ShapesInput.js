@@ -3,8 +3,8 @@ import html from "../../utils/html.js";
 
 /**
  * @typedef {{
- *   shapes: import("../canvas/sketch/sketch.js").PaintOptions["shapes"];
- *   onChange: (newShapes: import("../canvas/sketch/sketch.js").PaintOptions["shapes"]) => void;
+ *   shapes: import("../canvas/sketch/sketch.js").PaintOptions["drawing"]["shapes"];
+ *   onChange: (newShapes: import("../canvas/sketch/sketch.js").PaintOptions["drawing"]["shapes"]) => void;
  * }} Props
  */
 

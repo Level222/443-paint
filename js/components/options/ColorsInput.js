@@ -3,8 +3,8 @@ import RangeSliderWithTextBox from "../slider-with-text-box/RangeSliderWithTextB
 
 /**
  * @typedef {{
- *   colors: import("../canvas/sketch/sketch.js").PaintOptions["colors"]
- *   onChange: (newColors: import("../canvas/sketch/sketch.js").PaintOptions["colors"]) => void;
+ *   colors: import("../canvas/sketch/sketch.js").PaintOptions["drawing"]["colors"]
+ *   onChange: (newColors: import("../canvas/sketch/sketch.js").PaintOptions["drawing"]["colors"]) => void;
  * }} Props
  */
 
