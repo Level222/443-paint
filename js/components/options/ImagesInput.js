@@ -3,6 +3,7 @@ import { arrayWith } from "../../utils/array-utils.js";
 import StyledFileInput from "../StyledFileInput.js";
 import { useId } from "react";
 import PlusCircle from "../svg/PlusCircle.js";
+import removeFilenameExtension from "../../utils/remove-filename-extension.js";
 
 /**
  * @typedef {{
@@ -33,7 +34,7 @@ const ImagesInput = ({ images, onChange }) => {
               {
                 src: URL.createObjectURL(file),
                 enabled: true,
-                title: file.name.replace(/\.[^.]+$/, "")
+                title: removeFilenameExtension(file.name)
               }
             ]
           : []

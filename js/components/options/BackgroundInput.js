@@ -3,6 +3,7 @@ import StyledFileInput from "../StyledFileInput.js";
 import SliderWithTextBox from "../slider-with-text-box/SliderWithTextBox.js";
 import { useState, useEffect, useRef } from "react";
 import Radio from "../Radio.js";
+import removeFilenameExtension from "../../utils/remove-filename-extension.js";
 
 /**
  * @typedef {{
@@ -83,6 +84,7 @@ const BackgroundInput = ({ background, onChange }) => {
       ...background,
       mode: "image",
       src,
+      title: removeFilenameExtension(file.name),
       width: imageSize.width,
       height: imageSize.height
     });
@@ -96,8 +98,8 @@ const BackgroundInput = ({ background, onChange }) => {
         contents=${[
           {
             value: "color",
+            description: "color",
             content: html`
-              color
               <input
                 type="color"
                 value=${background.rgb}
@@ -118,14 +120,18 @@ const BackgroundInput = ({ background, onChange }) => {
           },
           {
             value: "image",
+            description: "image",
             content: html`
-              image
               <${StyledFileInput}
                 accept="image/*"
                 title="background image"
                 onChange=${handleFileChange}
               >
-                <img src=${background.src} className="background-input-image" />
+                <img
+                  src=${background.src}
+                  alt=${background.title}
+                  className="background-input-image"
+                />
               <//>
             `
           }
@@ -168,6 +174,7 @@ const BackgroundInput = ({ background, onChange }) => {
           onChangeComplete=${(/** @type {number} */ width) => {
             onChange({ ...background, width });
           }}
+          ariaLabelForHandle="canvas width"
         />
         height
         <${SliderWithTextBox}
@@ -179,16 +186,18 @@ const BackgroundInput = ({ background, onChange }) => {
           onChangeComplete=${(/** @type {number} */ height) => {
             onChange({ ...background, height });
           }}
+          ariaLabelForHandle="canvas height"
         />
         opacity
         <${SliderWithTextBox}
-          title="opacity of the background color"
+          title="opacity of the background"
           value=${background.alpha}
           min=${0}
           max=${255}
           onChange=${(/** @type {number} */ alpha) => {
             onChange({ ...background, alpha });
           }}
+          ariaLabelForHandle="opacity of the background"
         />
       </div>
     </div>

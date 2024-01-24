@@ -222,7 +222,6 @@ const useRcsliderWithTextBox = (options) => {
   const slider = html`
     <${Slider}
       ...${options.slider}
-      className="slide-input-slider"
       value=${currentValue}
       onChange=${handleSliderChange}
       onChangeComplete=${handleSliderChangeComplete}
@@ -252,6 +251,8 @@ const useRcsliderWithTextBox = (options) => {
               );
             }
           }
+          aria-label=${ensureArray(options.slider.ariaLabelForHandle)[i]}
+          aria-labelledby=${ensureArray(options.slider.ariaLabelledByForHandle)[i]}
         />
       `
   );

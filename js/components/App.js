@@ -47,6 +47,7 @@ const defaultOptions = {
     height: 800,
     mode: "color",
     rgb: "#fafafa",
+    title: "Mona Lisa",
     src: "./images/mona-lisa.jpg",
     alpha: 255
   }

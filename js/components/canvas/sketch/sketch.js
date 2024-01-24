@@ -25,6 +25,7 @@ import ImageCollection from "./image-collection.js";
  *     height: number;
  *     rgb: string;
  *     src: string;
+ *     title: string;
  *     alpha: number;
  *   };
  * }} PaintOptions

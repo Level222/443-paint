@@ -44,6 +44,7 @@ const DrawingInput = ({ drawing, onChange }) => {
           onChange=${(/** @type {[number, number]} */ [minSize, maxSize]) => {
             onChange({ ...drawing, minSize, maxSize });
           }}
+          ariaLabelForHandle=${["min size", "max size"]}
         />
         spread
         <${SliderWithTextBox}
@@ -53,7 +54,8 @@ const DrawingInput = ({ drawing, onChange }) => {
           max=${500}
           onChange=${(/** @type {number} */ spread) => {
             onChange({ ...drawing, spread });
-          }}
+          }},
+          ariaLabelForHandle="spread of shapes"
         />
         <${ColorsInput}
           colors=${drawing.colors}

@@ -25,6 +25,7 @@ const ColorsInput = ({ colors, onChange }) => {
           onChange=${(/** @type {[number, number]}*/ [min, max]) => {
             onChange({ ...colors, [colorName]: { min, max } });
           }}
+          ariaLabelForHandle=${[`min ${colorName} color`, `max ${colorName} color`]}
         />
       `
     )}
