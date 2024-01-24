@@ -15,7 +15,7 @@ GitHub Pages: <https://level222.github.io/443-paint/>
 
 `Ctrl` = Mac `Command`.
 
-|    Windows     | Description |
+|  Key Binding   | Description |
 | :------------: | :---------: |
 |    `Ctrl+Z`    |   Go back   |
 | `Ctrl+Shift+Z` | Go forward  |
