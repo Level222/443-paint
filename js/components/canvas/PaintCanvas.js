@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 import html from "../../utils/html.js";
 import P5Canvas from "../p5-react/P5Canvas.js";
 import sketch from "./sketch/sketch.js";
+import calcCanvasMaxSize from "./calc-canvas-max-size.js";
 
 /**
  * @typedef {(
@@ -21,7 +22,25 @@ import sketch from "./sketch/sketch.js";
  * @type {import("react").ForwardRefRenderFunction<PaintCanvasRef, Props>}
  */
 const PaintCanvasRefFunction = ({ options }, ref) => {
-  return html`<${P5Canvas} sketch=${sketch} options=${options} ref=${ref} />`;
+  const { maxWidth, maxHeight } = calcCanvasMaxSize(options.background.width);
+
+  return html`
+    <${P5Canvas}
+      sketch=${sketch}
+      options=${options}
+      fallback=${html`
+        <div
+          className="main-canvas-fallback"
+          style=${{
+            aspectRatio: `${options.background.width} / ${options.background.height}`,
+            maxWidth: `min(${maxWidth}, ${options.background.width}px)`,
+            maxHeight: `min(${maxHeight}, ${options.background.height}px)`
+          }}
+        />
+      `}
+      ref=${ref}
+    />
+  `;
 };
 
 const PaintCanvas = forwardRef(PaintCanvasRefFunction);

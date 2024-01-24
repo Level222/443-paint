@@ -1,3 +1,4 @@
+import calcCanvasMaxSize from "../calc-canvas-max-size.js";
 import drawRandomRenderingObject from "./draw-random-rendering-object.js";
 import HistoryStash from "./history-stash.js";
 import ImageCollection from "./image-collection.js";
@@ -109,14 +110,13 @@ const sketch = (p, detail) => {
   const updateCanvasSizeStyle = () => {
     const options = detail.getOptions();
 
+    const { maxWidth, maxHeight } = calcCanvasMaxSize(options.background.width);
+
     renderer
       .style("width", "auto")
       .style("height", "auto")
-      .style(
-        "max-width",
-        `min(100%, ${options.background.width / devicePixelRatio}px)`
-      )
-      .style("max-height", "85vh");
+      .style("max-width", maxWidth)
+      .style("max-height", maxHeight);
   };
 
   const resize = () => {
