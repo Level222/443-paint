@@ -54,7 +54,7 @@ const DrawingInput = ({ drawing, onChange }) => {
           max=${500}
           onChange=${(/** @type {number} */ spread) => {
             onChange({ ...drawing, spread });
-          }},
+          }}
           ariaLabelForHandle="spread of shapes"
         />
         <${ColorsInput}
