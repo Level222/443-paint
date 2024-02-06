@@ -7,7 +7,7 @@
  */
 const calcCanvasMaxSize = (width) => ({
   maxWidth: `min(100%, ${width / devicePixelRatio}px)`,
-  maxHeight: "85vw"
+  maxHeight: "85vh"
 });
 
 export default calcCanvasMaxSize;
