@@ -49,7 +49,11 @@ const ImagesInput = ({ images, onChange }) => {
           const id = `${idPrefix}-${index}`;
 
           return html`
-            <label key=${index} className="image-wrapper" htmlFor=${id}>
+            <label
+              key=${index}
+              className="image-checkbox-container"
+              htmlFor=${id}
+            >
               <input
                 type="checkbox"
                 id=${id}
@@ -68,7 +72,9 @@ const ImagesInput = ({ images, onChange }) => {
                   }
                 }
               />
-              <img src=${src} className="images-input-image" alt=${title} />
+              <div className="image-wrapper">
+                <img src=${src} className="images-input-image" alt=${title} />
+              </div>
             </label>
           `;
         })}
